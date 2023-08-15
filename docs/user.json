@@ -1,0 +1,50 @@
+{
+    "id": "9619d8b3-0d3e-4f11-a555-38ad7872536d",
+    "aud": "authenticated",
+    "role": "authenticated",
+    "email": "manishdhital14@gmail.com",
+    "email_confirmed_at": "2023-05-14T15:39:54.936909Z",
+    "phone": "",
+    "confirmed_at": "2023-05-14T15:39:54.936909Z",
+    "last_sign_in_at": "2023-06-18T07:42:03.19773Z",
+    "app_metadata": {
+        "provider": "google",
+        "providers": [
+            "google"
+        ]
+    },
+    "user_metadata": {
+        "avatar_url": "https://lh3.googleusercontent.com/a/AAcHTtfPZOiBxLuGFJ_NPcUHaUZb2YGc9o-A88Bj2WlwZw=s96-c",
+        "email": "manishdhital14@gmail.com",
+        "email_verified": true,
+        "full_name": "Man Ish",
+        "iss": "https://accounts.google.com",
+        "name": "Man Ish",
+        "picture": "https://lh3.googleusercontent.com/a/AAcHTtfPZOiBxLuGFJ_NPcUHaUZb2YGc9o-A88Bj2WlwZw=s96-c",
+        "provider_id": "114570370188270572601",
+        "sub": "114570370188270572601"
+    },
+    "identities": [
+        {
+            "id": "114570370188270572601",
+            "user_id": "9619d8b3-0d3e-4f11-a555-38ad7872536d",
+            "identity_data": {
+                "avatar_url": "https://lh3.googleusercontent.com/a/AAcHTtfPZOiBxLuGFJ_NPcUHaUZb2YGc9o-A88Bj2WlwZw=s96-c",
+                "email": "manishdhital14@gmail.com",
+                "email_verified": true,
+                "full_name": "Man Ish",
+                "iss": "https://accounts.google.com",
+                "name": "Man Ish",
+                "picture": "https://lh3.googleusercontent.com/a/AAcHTtfPZOiBxLuGFJ_NPcUHaUZb2YGc9o-A88Bj2WlwZw=s96-c",
+                "provider_id": "114570370188270572601",
+                "sub": "114570370188270572601"
+            },
+            "provider": "google",
+            "last_sign_in_at": "2023-05-14T15:39:54.933637Z",
+            "created_at": "2023-05-14T15:39:54.933683Z",
+            "updated_at": "2023-06-18T07:42:03.193936Z"
+        }
+    ],
+    "created_at": "2023-05-14T15:39:54.9276Z",
+    "updated_at": "2023-06-18T07:42:03.201356Z"
+}
