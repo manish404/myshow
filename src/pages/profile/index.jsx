@@ -83,7 +83,7 @@ function ProfilePage() {
                             <button onClick={changeView} data-view="profile">Profile</button>
                             {/* can see&edit public data [name, email, contact, bio, profile-img] */}
                         </li>
-                        {isUser(role) && <li className="menu-item">
+                        {(isUser(role) || isAdmin(role)) && <li className="menu-item">
                             <button onClick={changeView} data-view="bookings">Bookings</button>
                         </li>}
                         {/*  */}
