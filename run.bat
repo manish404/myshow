@@ -1,2 +1,2 @@
 @echo off
-code . && npm run dev
+npm run dev
