@@ -7,7 +7,7 @@ import Head from "next/head";
 // 
 function MoviesPage() {
     const router = useRouter();
-    const { movie } = router.query;
+    const { movie: slug } = router.query;
 
     return (
         <Layout>
@@ -15,11 +15,10 @@ function MoviesPage() {
                 <title>myshow.com | Movies</title>
             </Head>
             {
-                movie ?
-                    <MovieView movie={movie} />
+                slug ?
+                    <MovieView movie={slug} />
                     :
                     <>
-                        <h1 className="font-semibold text-lg">Movies List</h1>
                         <MoviesView />
                     </>
             }

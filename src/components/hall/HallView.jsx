@@ -12,7 +12,6 @@ import HallInfo from "./HallInfo";
 import println from "@/helpers/print";
 
 function HallView({ type, hallID, hallName }) {
-    // println('hello', typeof hallID, hallName);
     const { data: hall, error } = useHall(hallID || hallName);
     const router = useRouter();
     const { user: isFromAdmin } = router.query;

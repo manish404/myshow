@@ -1,12 +1,20 @@
 import { useHalls } from "@/hooks/hallHooks";
 import HallCard from "./HallCard";
 import Loader from "../Loader";
+import { isAdmin } from "@/helpers/roleCheck";
+import HallSearchingForm from "../booking/HallSearchingForm";
 
 function HallsView({ uid = null, role, cityID = null, limit = null }) {
     const { data: halls } = useHalls(uid, cityID, limit);
 
     return (
         <div className="w-full full-page">
+            <>
+                {isAdmin(role) &&
+                    <></>
+                    // <HallSearchingForm />
+                }
+            </>
             {halls ?
                 <ul className="mt-8 flex flex-wrap">
                     {

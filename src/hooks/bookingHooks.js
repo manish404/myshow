@@ -5,19 +5,23 @@ import supabase from "@/db/supabase";
 const staleTime = (process.env.NODE_ENV === 'development' ? 5 : 2)
     * 60 * 1000; // cache-time in minutes, converted to ms;
 
-async function getMyBookings(uid) {
+async function getBookings(uid, hallId) {
     println("Fetching my bookings");
-    const { data, error } = await supabase.from('bookings')
-        .select('date, movies(title),  halls(name), showtimes(time, shift), booked, seats')
-        .eq('booked_by', uid);
+    let data, error;
+    if (uid) ({ data, error } = await supabase.from('bookings')
+        .select('date, movies(title), halls(name), showtimes(time, shift), booked, seats')
+        .eq('booked_by', uid));
+    else if (hallId) ({ data, error } = await supabase.from('bookings')
+        .select('date, movies(title), showtimes(time, shift), booked, seats')
+        .eq('hall', hallId));
     if (error) return null;
-    println('from my-bookings', data);
+    println(`bookings hall:${hallId} or user:${uid}`, data);
     return data;
 }
 
-const useBookings = (uid) => {
-    const keys = [`bookings-${uid}`];
-    return useQuery(keys, () => getMyBookings(uid), { staleTime })
+const useBookings = (uid, hallId) => {
+    const keys = uid ? [`bookings-${uid}`] : [`bookings-${hallId}`];
+    return useQuery(keys, () => getBookings(uid, hallId), { staleTime })
 }
 
 export { useBookings };

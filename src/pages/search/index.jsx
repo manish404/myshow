@@ -17,7 +17,7 @@ function SearchView() {
                 <div>
                     {
                         type === 'movie' &&
-                        <MovieView type={"search"} slugify={true} movie={input} basic={false} />
+                        <MovieView type={"search"} movie={input} basic={false} />
                     }
                     {type === 'hall' &&
                         <HallView type={"search"} hallName={input} />

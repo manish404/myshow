@@ -19,7 +19,7 @@ function BookingComponent({ hallID, showID }) {
     return (
         <div>
             <HallInfo hall={hall} />
-            <div className="my-4">
+            <div className="my-4 guide">
                 <h1 className="font-semibold">
                     Guides
                     <button onClick={() => {
@@ -35,7 +35,7 @@ function BookingComponent({ hallID, showID }) {
                     </button>
                 </h1>
                 {showGuide &&
-                    <ol className="list-disc guide pl-10 bg-green-50 py-2 rounded-md">
+                    <ol className="list-disc guide pl-10 bg-green-50 py-2 rounded-md darkmode darkborder">
                         <li>[Ctrl+Hover] over the seats or click to select them.</li>
                         <li>Can select/book upto 10 seats.</li>
                         <li>After you book, you must complete payment within 2 minutes.</li>

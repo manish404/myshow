@@ -1,9 +1,14 @@
 import supabase from "@/db/supabase";
 import println from "@/helpers/print";
 
-async function signInWithGoogle() {
+async function signInWithGoogle(redirectTo) {
+    redirectTo += '/';
+    println(redirectTo);
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
+        options: {
+            redirectTo,
+        },
     });
     println('siwg', data, error);
 }

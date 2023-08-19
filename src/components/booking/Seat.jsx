@@ -25,7 +25,7 @@ function Seat({ seat, status: { paid, reserved, booked } }) {
     }
     return (
         <li className={`w-7 h-7 shadow-md border-[1px] border-blue-500 rounded-full`}>
-            <button className={`h-full w-full rounded-full ${(booked && paid) ? 'bg-red-500 cursor-not-allowed' : booked ? 'bg-yellow-500 cursor-progress' : reserved ? 'bg-green-500' : 'cursor-pointer'}`} onMouseOver={!booked ? handleMouseOver : () => { }}
+            <button className={`h-full w-full rounded-full ${(booked && paid) ? 'bg-red-500 cursor-not-allowed' : booked ? 'bg-yellow-500 cursor-progress' : reserved ? 'bg-green-500' : 'pointer'}`} onMouseOver={!booked ? handleMouseOver : () => { }}
                 onClick={!booked ? handleClick : () => { }}></button>
         </li>
     )

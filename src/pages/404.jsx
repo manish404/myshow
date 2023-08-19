@@ -1,25 +1,24 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import FullPage from "@/components/home/FullPage";
 import Head from "next/head";
 
 function Custom404() {
     return (
-        <div className="col h-screen max-w-full justify-center">
+        <div>
             <Head>
                 <title>myshow.com |  Page Not Found | 404</title>
             </Head>
             <Header />
-            <FullPage>
-                <div className="col items-center">
-                    <p className="code text-9xl font-bold">
-                        404
+            <div className="full-page grid place-items-center">
+                <div className="col items-center justify-center">
+                    <p className="text-[10rem] font-bold text-yellow-500 ">
+                        OOPS!
                     </p>
-                    <p className="text-2xl font-semibold">
+                    <p className="text-2xl font-semibold text-red-500">
                         Page Not Found!
                     </p>
                 </div>
-            </FullPage>
+            </div>
             <Footer />
         </div>
     )

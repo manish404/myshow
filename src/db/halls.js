@@ -22,7 +22,7 @@ const getHalls = async (adminID = null, cityID = null, limit = null) => {
 }
 
 async function getHall(id /**hall-id or hall-name */, hall) {
-    // println(id, hall);
+    println(id);
     if (!id) return hall;
     println(`[+] Fetching hall "${id}"!`);
     let data, error;

@@ -1,9 +1,9 @@
-import println from "@/helpers/print";
 import { useMovie } from "@/hooks/movieHooks";
 import moment from "moment/moment";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import MarkFavouriteButton from "./MarkFavouriteButton";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 const fakePoster = `https://fakeimg.pl/300x300/`;
 
@@ -12,24 +12,29 @@ function MovieCard({ index = 1, movie = null, slug = null, basic = true }) {
      * useMovie here is not needed, but to reduce request to database
      * this way of caching could be the best way!
      */
+    const { user: { user: { id: userId } } } = useAuthContext();
     if (slug) {
-        ({ data: movie } = useMovie(slug));
+        ({ data: movie } = useMovie(userId, false, slug));
     } else {
-        useMovie(null, movie);
+        useMovie(userId, null, movie);
     }
-    const priority = index < 4 ? true : false;
-    useEffect(() => {
-    }, []);
+    const priority = index < 5 ? true : false;
     return (
         <>
             {movie &&
                 <div className="row">
-                    <Link href={`/movies?movie=${movie.slug}`} >
+                    <Link aria-label={`${movie.title} - myshow`} href={`/movies?movie=${movie?.slug}`} >
                         <div className="movie-card">
-                            <p className="title">{movie.title}</p>
-                            <Image priority={priority} loading={priority ? 'eager' : 'lazy'} src={movie.imageURL || fakePoster} width={300} height={300} alt={movie.title} className="w-[350px] h-[200px] my-2"
+                            <span className="title">{movie.title}</span>
+                            <Image priority={priority} loading={priority ? 'eager' : 'lazy'} src={movie?.imageURL || fakePoster} width={300} height={300} alt={movie.title || 'myshow'} className="w-[350px] h-[200px] my-2"
                                 onContextMenu={(e) => e.preventDefault()} />
-                            <p>{moment(movie.release_date).calendar()}</p>
+                            <div className="row items-center justify-between">
+                                <span>{moment(movie.release_date).calendar()}</span>
+                                {
+                                    userId &&
+                                    <MarkFavouriteButton userId={userId} movieId={movie.id} isLiked={movie.isLiked} />
+                                }
+                            </div>
                         </div>
                     </Link>
                     {

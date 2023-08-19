@@ -1,5 +1,13 @@
+.darkmode { 
+    @apply dark:bg-black dark:text-white transition duration-200 ease-in-out;
+}
+.darkborder {
+    @apply dark:border dark:border-gray-50;
+}
+
 body {
-    @apply overflow-x-hidden;
+    @apply overflow-x-hidden darkmode;
+    font-family:'Bricolage Grotesque', sans-serif;
 }
 
 select {
@@ -27,7 +35,7 @@ i {
 }
 
 .header {
-    @apply row w-full items-center justify-between px-20 py-1 mb-2 shadow-md right-0 left-0 z-10 bg-white;
+    @apply row w-full items-center justify-between px-20 py-1 mb-2 shadow-md right-0 left-0 z-10 bg-white darkmode;
 }
 
 .menu-bar {
@@ -35,28 +43,28 @@ i {
 }
 
 .menu-item {
-    @apply mx-2 text-sm font-medium text-slate-900 pointer;
-}
+    @apply mx-2 text-sm font-medium text-slate-900 pointer darkmode;
 
-.menu-item form {
-    @apply px-1 py-1 border rounded-md;
-}
-
-.menu-item form input {
-    @apply outline-none text-slate-500 sm:w-40 lg:w-80;
+    & i {
+        @apply text-sm;
+    }
+    & form {
+        @apply px-1 py-1 border rounded-md;
+        & input {
+            @apply outline-none text-slate-500 sm:w-40 lg:w-80 darkmode;
+        }
+    }
 }
 
 .input-box {
-    @apply col border px-3 py-1 rounded-sm w-[70%] relative m-4;
-}
-
-.input-box label {
-    @apply text-xs absolute -top-[27%] left-1 bg-white font-semibold px-2;
-}
-
-.input-box input,
-.input-box textarea {
-    @apply outline-none text-lg;
+    @apply col border px-3 py-1 rounded-sm w-[70%] relative m-4 darkmode;
+    & label {
+        @apply text-xs absolute -top-[27%] left-1 bg-white font-semibold px-2;
+    }
+    & input,
+    & textarea {
+        @apply outline-none text-lg;
+    }
 }
 
 .notice {
@@ -77,50 +85,43 @@ i {
 
 .movie-form {
     @apply w-10/12 m-auto flex flex-row justify-around;
-}
-
-.movie-form .left {
-    @apply w-1/2;
-}
-
-.movie-form .right {
-    @apply ml-8 w-1/2 flex flex-col justify-end items-end;
+    & .left {
+        @apply w-1/2;
+    }
+    & .right {
+        @apply ml-8 w-1/2 flex flex-col justify-end items-end;
+    }
 }
 
 .input-row {
     @apply my-3 w-full;
-}
-
-.input-row input,
-.input-row textarea {
-    @apply border-none outline-none shadow-md shadow-slate-200 py-2 px-4 w-full rounded-sm font-semibold;
-}
-
-.input-row label,
-.input-row label {
-    @apply text-[1rem] font-semibold;
-}
-
-.input-row input::placeholder,
-.input-row textarea::placeholder {
-    @apply text-[1rem];
+    & input,
+    & textarea {
+        @apply border-none outline-none shadow-md shadow-slate-200 py-2 px-4 w-full rounded-sm font-semibold;
+    }
+    & label {
+        @apply text-[1rem] font-semibold;
+    }
+    & input::placeholder,
+    & textarea::placeholder {
+        @apply text-[1rem];
+    }
 }
 
 input[type="submit"],
 button[type="submit"], 
 button[type="button"],
 .booking button {
-    @apply pointer border-blue-200 shadow-sm shadow-black py-2 px-6 rounded-sm w-max;
+    @apply pointer border-blue-200 shadow-sm shadow-black py-2 px-6 rounded-sm w-max darkborder hover:font-semibold;
 }
 
 /* MovieCard.jsx */
 .movie-card {
     @apply shadow-lg w-max px-4 py-1 rounded-sm lg:mx-6 mb-2
         pointer hover:shadow-2xl text-left;
-}
-
-.movie-card .title {
-    @apply text-[1.25rem] font-semibold capitalize;
+    & .title {
+        @apply text-[1.25rem] font-semibold capitalize;
+    }
 }
 
 /* halls */
@@ -140,7 +141,7 @@ button[type="button"],
 }
 
 .full-page {
-    @apply min-h-[55vh] h-[95vh];
+    @apply min-h-[100vh] h-[100vh];
 }
 
 .contact-form {
@@ -155,25 +156,42 @@ button[type="button"],
 }
 
 .features {
-    @apply w-full justify-around mt-20;
+    @apply w-full justify-around mt-20 row items-stretch flex-wrap;
     &  .feature-card {
-        @apply w-[24%] h-max col min-h-[15rem] bg-green-50 px-6 py-10 rounded-sm;
-
+        @apply w-[24%] col bg-[#9ef55c] px-6 py-10 rounded-md darkmode dark:border dark:border-gray-50;
         & h1 {
-            @apply text-green-500 text-xl;
+            @apply text-[24px] font-semibold;
         }
         & .description {
-            @apply text-base font-normal mt-5;
+            @apply text-lg font-normal mt-5;
         }
     }
 }
 
 .faq {
-    @apply relative my-4;
+    @apply relative my-4 pointer;
     & .ans {
-        @apply text-lg mt-1 transition-transform duration-1000;
+        @apply text-lg mt-1;
     }
     & .toggler {
-        @apply absolute top-0 right-0 cursor-pointer;
+        @apply absolute top-0 right-0 pointer;
     }
+}
+
+.footer {
+    @apply col mt-4 bg-gray-100 text-sm p-20 h-[25rem] justify-between items-stretch darkmode;
+    & hr {
+        @apply w-11/12 h-1;
+    }
+    & div.copyright {
+        @apply text-[0.5rem] w-full row justify-center items-center;
+    }
+}
+
+.lock {
+    @apply relative;
+}
+.lock::before {
+    content: "";
+    @apply absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 z-50;
 }

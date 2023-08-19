@@ -2,7 +2,7 @@ import Link from "next/link";
 
 function ArrowButton({ text, url, position }) {
     return (
-        <Link className={`menu-item flex items-center ${position === 'back' ? 'float-left' : 'float-right'}`}
+        <Link aria-label="myshow" className={`menu-item flex items-center ${position === 'back' ? 'float-left' : 'float-right'}`}
             href={url}>
             <span>
                 {

@@ -4,7 +4,7 @@ import Logo from "./Logo";
 function SocialIcon({ icon }) {
     return (
         <>
-            <Link href="/" target="_blank">
+            <Link aria-label={icon} href="/" target="_blank">
                 <i className={`bi bi-${icon}`}></i>
             </Link>
         </>
@@ -14,7 +14,7 @@ function SocialIcon({ icon }) {
 function Menu({ url, name }) {
     return (
         <li className="menu-item">
-            <Link href={url}>
+            <Link aria-label={`${name} - myshow`} href={url}>
                 {name}
             </Link>
         </li>
@@ -23,7 +23,7 @@ function Menu({ url, name }) {
 
 function Footer() {
     return (
-        <div className="col mt-4 bg-gray-100 px-20 py-[10rem] text-base">
+        <div className="footer">
             {/* top */}
             <div className="row justify-between">
                 <div className="col justify-center">
@@ -36,21 +36,45 @@ function Footer() {
                 </div>
                 <div className="max-w-4xl w-max overflow-x-auto">
                     <ul>
-                        <li className="flex flex-row"><i className="bi bi-geo-alt"></i>
-                            <span className="font-semibold text-green-500 mx-1">Location :</span> Tulsipur-Dang, Nepal
+                        <li className="row items-center justify-between">
+                            <div>
+                                <i className="bi bi-geo-alt"></i>
+                                <span className="font-semibold text-green-500 mx-1">Location :</span>
+                            </div>
+                            <span>Tulsipur-Dang, Nepal</span>
                         </li>
-                        <li className="flex flex-row"><i className="bi bi-envelope"></i>
-                            <span className="font-semibold text-green-500 mx-1">Email :</span> contact@myshow.com
+                        <li className="row items-center justify-between">
+                            <div>
+                                <i className="bi bi-envelope"></i>
+                                <span className="font-semibold text-green-500 mx-1">Email :</span>
+                            </div>
+                            <span>contact@myshow.com</span>
                         </li>
-                        <li className="flex flex-row"><i className="bi bi-telephone"></i>
-                            <span className="font-semibold text-green-500 mx-1">Tel :</span> 082-5*****
+                        <li className="row items-center justify-between">
+                            <div>
+                                <i className="bi bi-telephone"></i>
+                                <span className="font-semibold text-green-500 mx-1">Telephone :</span>
+                            </div>
+                            <span>082-5*****</span>
                         </li>
-                        <li className="flex flex-row"><i className="bi bi-whatsapp"></i>
-                            <span className="font-semibold text-green-500 mx-1">Whatsapp :</span> 98********
+                        <li className="row items-center justify-between">
+                            <div>
+                                <i className="bi bi-whatsapp"></i>
+                                <span className="font-semibold text-green-500 mx-1">Whatsapp :</span>
+                            </div>
+                            <span>98********</span>
                         </li>
                     </ul>
                 </div>
                 <div className="row">
+                    <div>
+                        <ul>
+                            <Menu url={"/movie_reviews"} name={"Movie reviews"} />
+                            <Menu url={"/hall_reviews"} name={"Hall reviews"} />
+                            <Menu url={"/rating?type='movie'"} name={"Movie Rating"} />
+                            <Menu url={"/rating?type='hall'"} name={"Hall Rating"} />
+                        </ul>
+                    </div>
                     <div>
                         <ul>
                             <Menu url={"/terms_conditions"} name={"Terms and Conditions"} />
@@ -77,22 +101,18 @@ function Footer() {
                 </div>
             </div>
             {/* bottom */}
-            <div>
-                <div className="text-sm w-full row justify-center items-center">
-                    <hr className="w-full" />
-                    <span className="w-[40%] text-base">
+            <div className="mt-[8rem]">
+                <div className="copyright">
+                    <hr />
+                    <span className="w-[40%] text-sm">
                         Copyright &copy;
                         <span className="text-green-500 font-semibold">myshow</span>@2023;
                     </span>
-                    <hr className="w-full" />
+                    <hr />
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
-
-// setdata((pre) => {
-//     return { ...pre, [name]: value }
-//   })
 
 export default Footer;

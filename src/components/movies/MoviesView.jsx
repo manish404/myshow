@@ -6,8 +6,8 @@ import { useAuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 
 function MoviesView() {
-    const { isError, data: movies } = useMovies();
-    const { user: { user: { role } } } = useAuthContext();
+    const { user: { user: { role, id } } } = useAuthContext();
+    const { isError, data: movies } = useMovies(id);
     if (isError) {
         const router = useRouter();
         router.push('/');

@@ -10,7 +10,7 @@ function ShowTimeCard({ hallID, showTime, role }) {
     return (
         <li className="show-time">
             {isUser(role) ?
-                <Link href={link}>
+                <Link aria-label="myshow" href={link}>
                     {showTime.time} {showTime.shift === 0 ? 'am' : 'pm'}
                 </Link> :
                 <button onClick={() => {

@@ -32,15 +32,15 @@ function AuthContextProvider(props) {
                     // 
                     const { data, error } = await getRole();
                     if (data.length > 0) {
-                        const roleExp = data[0].expires_on || null;
+                        // const roleExp = data[0].expires_on || null;
                         // check role expiration date, if expired: set role to user;
                         _user['role'] = data[0].role;
-                        _user['role_expiration'] = roleExp;
+                        // _user['role_expiration'] = roleExp;
                     }
-                    setUser({ ..._user });
                     // 
                     dispatch(setNotice(`Welcome, ${_user.name}!`));
                     setLoggedIn(true);
+                    setUser({ ..._user });
                     router.replace(localStorage.getItem('_href') || '/');
                 }
             }
@@ -48,7 +48,7 @@ function AuthContextProvider(props) {
         return () => {
             authEvent.data.subscription.unsubscribe();
         }
-    }, [loggedIn]);
+    }, [user]);
     // 
     return (
         <AuthContext.Provider value={{

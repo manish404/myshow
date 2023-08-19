@@ -5,11 +5,20 @@ import slugify from "slugify";
 import Head from "next/head";
 import { capitalize } from "@/helpers/string";
 import ShowtimesView from "../hall/ShowtimesView";
+import { useAuthContext } from "@/contexts/AuthContext";
+import println from "@/helpers/print";
+import { isSuperAdmin } from "@/helpers/roleCheck";
+import { useRouter } from "next/router";
+import { deleteMovie } from "@/db/movies";
+import { useDispatch } from "react-redux";
+import { setNotice } from "@/store/slices/common";
 
-function MovieView({ type, movie: slug_title, slugify: shouldSlugify, basic }) {
+function MovieView({ type, movie: slug_title, slugify: shouldSlugify = false, basic }) {
     if (shouldSlugify) slug_title = slugify(slug_title, { lower: true, strict: true });
-    const { data: movieDetails } = useMovie(slug_title);
-
+    const { user: { user: { id, role } } } = useAuthContext();
+    const { data: movieDetails } = useMovie(id, type === 'search' ? true : false, slug_title);
+    const router = useRouter();
+    const dispatch = useDispatch();
     return (
         <>
             <Head>
@@ -20,9 +29,18 @@ function MovieView({ type, movie: slug_title, slugify: shouldSlugify, basic }) {
                     <div className="movie-details mt-8 row content-around place-items-start">
                         <div className="">
                             {/* title */}
-                            <h1 className="text-2xl font-semibold capitalize">{movieDetails?.title}</h1>
+                            <h1 className="text-2xl font-semibold capitalize row justify-between">{movieDetails?.title}
+                                {
+                                    isSuperAdmin(role) &&
+                                    <button onClick={async () => {
+                                        const res = await deleteMovie(movieDetails?.id);
+                                        if (res) router.back();
+                                        else dispatch(setNotice('Unable to delete!'));
+                                    }}><i className="bi bi-trash"></i></button>
+                                }
+                            </h1>
                             {/* image */}
-                            <Image className="my-4" height={500} width={500} src={movieDetails?.imageURL} alt={movieDetails?.title} priority={true} />
+                            <Image className="my-4 w-auto" height={500} width={500} src={movieDetails?.imageURL} alt={movieDetails?.title} priority={true} />
                             {/* release-date */}
                             <h1 className="font-semibold text-base">Release Date : <span>{movieDetails?.release_date}</span></h1>
                             {/* description */}
@@ -32,22 +50,18 @@ function MovieView({ type, movie: slug_title, slugify: shouldSlugify, basic }) {
                         <div className="ml-[2.5rem] font-semibold">
                             {!basic &&
                                 <ul className="flex">
-                                    {slug_title &&
-                                        <ShowtimesView movie={slug_title} />
+                                    {movieDetails?.slug &&
+                                        <ShowtimesView movie={movieDetails?.slug} />
                                     }
                                 </ul>
                             }
                         </div>
                     </div> :
-                    <Loader />
+                    <h1 className="font-semibold text-xl">Movie Not Found!</h1>
                 }
             </div>
         </>
     )
 }
-
-{/* <li key={i} className="">
-                                                    {show.time} &nbsp; {show.day}
-                                                </li> */}
 
 export default MovieView;

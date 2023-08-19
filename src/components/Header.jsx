@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setNotice } from "@/store/slices/common";
-import { logout, signInWithGoogle } from "@/db/auth";
+import { signInWithGoogle } from "@/db/auth";
 import { useRouter } from "next/router";
 import { useAuthContext } from "@/contexts/AuthContext";
 import Logo from "./Logo";
@@ -14,6 +14,7 @@ function Header() {
     const { user: { user }, status: { loggedIn } } = useAuthContext();
     const dispatch = useDispatch();
     const router = useRouter();
+    const [theme, setTheme] = useState('');
     // 
     function search(e) {
         e.preventDefault();
@@ -28,6 +29,22 @@ function Header() {
             query: { type: type.trim(), input: input.trim() }
         });
     }
+    function updateTheme(animation, theme) {
+        setTheme(theme);
+        document.documentElement.className = `${animation} ${theme}`;
+    }
+    function switchTheme() {
+        const _theme = theme === 'light' ? 'dark' : 'light';
+        const animation = theme === 'light' ? 'vanishIn' : 'vanishOut';
+        localStorage.setItem('myshow-theme', _theme);
+        updateTheme(animation, _theme);
+    }
+    // 
+    useEffect(() => {
+        const _theme = localStorage.getItem('myshow-theme') || 'light';
+        const animation = _theme === 'light' ? 'vanishIn' : 'vanishOut';
+        updateTheme(animation, _theme);
+    }, []);
     // 
     return (
         <header className="header">
@@ -64,45 +81,51 @@ function Header() {
                     </>
                 }
                 <li className="menu-item">
-                    <Link href={"/movies"}>
-                        Movies
+                    <Link aria-label={"movies - myshow"} href={"/movies"}>
+                        Movies <i className="bi bi-film text-green-500"></i>
+                    </Link>
+                </li>
+                {loggedIn && <li className="menu-item">
+                    <Link aria-label="saved - myshow" href={"/saved"}>
+                        Saved <i className="bi bi-bookmark-fill text-green-500"></i>
+                    </Link>
+                </li>}
+                <li className="menu-item">
+                    <Link aria-label="halls - myshow" href={"/halls"}>
+                        Halls <i className="bi bi-geo-alt text-green-500"></i>
                     </Link>
                 </li>
                 <li className="menu-item">
-                    <Link href={"/halls"}>
-                        Halls
-                    </Link>
-                </li>
-                <li className="menu-item">
-                    <Link href={"/offers"}>
-                        Offers
+                    <Link aria-label="offers - myshow" href={"/offers"}>
+                        Offers <i className="bi bi-gift-fill text-green-500"></i>
                     </Link>
                 </li>
                 {!loggedIn &&
                     <li className="menu-item">
-                        <button onClick={async () => {
-                            await signInWithGoogle();
-                        }}>Sign In</button>
+                        <button className="row items-center" onClick={async () => {
+                            const DOMAIN = location.origin;
+                            await signInWithGoogle(DOMAIN);
+                        }}>
+                            Sign In
+                        </button>
                     </li>
                 }
                 {loggedIn &&
                     <>
                         <li className="menu-item">
-                            <Link href={"/profile"}>
+                            <Link aria-label="profile - myshow" href={"/profile"}>
                                 {/* <i className="bi bi-person-circle "></i> */}
                                 <img width={30} className="rounded-3xl" src={user?.picture} alt={user?.name} />
                             </Link>
                         </li>
-                        <li>
-                            <button onClick={async () => {
-                                await logout();
-                                router.push('/');
-                            }}>
-                                <i className="bi bi-box-arrow-right"></i>
-                            </button>
-                        </li>
                     </>
                 }
+                <li>
+                    <button onClick={switchTheme}>
+                        <i className={`text-2xl ml-2 bi bi-${theme === 'light' ? 'brightness-low' : 'brightness-high'
+                            }`}></i>
+                    </button>
+                </li>
             </ul>
         </header >
     )

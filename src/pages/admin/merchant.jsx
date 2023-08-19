@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import supabase from "@/db/supabase";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
+import println from "@/helpers/print";
 
 const MerchantFormContext = createContext({});
 function useMerchantForm() {
@@ -32,7 +33,7 @@ function MerchantInput({ type = 'text', name, label }) {
 
 function MerchantForm() {
     // useMerchant -> will try to fetch merchant detail if user.role= and user.merchant;
-    const { user: { user: { id: uid } } } = useAuthContext();
+    const { user: { user: { id: uid, email } } } = useAuthContext();
     const [uploadStatus, setUploadStatus] = useState(false);
     const [merchant, setMerchant] = useState({ ...merchantSchema });
     const dispatch = useDispatch();
@@ -47,19 +48,21 @@ function MerchantForm() {
     }
 
     async function saveMerchant() {
+        // println(merchant);
         const { data: merchantData, error: joinMerchantError } = await supabase
             .from('merchants')
             .insert([merchant]);
 
         if (joinMerchantError) {
+            println(joinMerchantError);
             setUploadStatus(false);
             dispatch(setNotice('Joining merchant process failed!'));
             return;
         }
+        println(merchantData);
         setUploadStatus(false);
-        dispatch(setNotice(`Joining merchant process succeed!`));
+        dispatch(setNotice(`Saved, Please visit office with documents to complete it!`));
         setMerchant({ ...merchantSchema });
-        localStorage.setItem('merchant-id', merchantData.id);
     }
 
     async function joinMerchant(e) {
@@ -82,7 +85,7 @@ function MerchantForm() {
     }
 
     async function handlePostJoinProcess() {
-        // get merchant-id from localstorage.
+        // get merchant-id from db.
         // if exists
         // will be done in payment/success
     }
@@ -98,10 +101,11 @@ function MerchantForm() {
                     <form onSubmit={joinMerchant} className="col items-end">
                         <MerchantInput name={'full_name'} label={'Full Name'} />
                         <MerchantInput name={'address'} label={'Address'} />
-                        <MerchantInput type="number" name={'phone'} label={'Phone'} />
+                        <MerchantInput type="email" name={'email'} label={'Email'} />
+                        <MerchantInput type="text" name={'phone'} label={'Phone'} />
                         <MerchantInput name={'business_name'} label={'Business Name'} />
                         <MerchantInput name={'business_address'} label={'Business Address'} />
-                        <MerchantInput type="number" name={'pan_number'} label={'Pan Number'} />
+                        <MerchantInput type="text" name={'pan_number'} label={'Pan Number'} />
                         <MerchantInput type="date" name={'start_date'} label={'Business start date'} />
                         <button type="submit">
                             {

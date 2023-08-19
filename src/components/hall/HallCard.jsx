@@ -6,7 +6,7 @@ function HallCard({ hall, role }) {
     const link = `/halls?id=${hall.id}` + (role ? `&user=${role}` : '');
     return (
         <li className="w-max hall-card mx-1">
-            <Link href={link} className="row items-end row justify-between">
+            <Link aria-label="myshow" href={link} className="row items-end row justify-between">
                 <span className="capitalize">
                     {hall?.name}
                 </span>

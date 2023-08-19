@@ -6,7 +6,7 @@ export default function AuthenticatedPage({ children, redirect = "/" }) {
     // 
     useEffect(() => {
         if (!loggedIn) window.location.href = redirect;
-    })
+    }, [])
     // 
     return (
         <>

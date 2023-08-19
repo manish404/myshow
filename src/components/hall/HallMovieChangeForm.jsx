@@ -7,9 +7,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Info from "../Info";
 import { capitalize } from "@/helpers/string";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 export default function HallMovieChangeForm({ hallID, prevMovie }) {
-    let { data: comingMovies } = useMovies(true);
+    const { user: { user: { id } } } = useAuthContext();
+    let { data: comingMovies } = useMovies(id, true);
     const queryClient = useQueryClient();
     const dispatch = useDispatch();
     /**
