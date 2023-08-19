@@ -72,10 +72,9 @@ function _SuperAdminPage() {
 
 export default function SuperadminPage() {
     return (
-        <>
-            <SuperAdminContextProvider>
-                <_SuperAdminPage />
-            </SuperAdminContextProvider>
+        <SuperAdminContextProvider>
+            <_SuperAdminPage />
             <Notice />
-        </>)
+        </SuperAdminContextProvider>
+    )
 }

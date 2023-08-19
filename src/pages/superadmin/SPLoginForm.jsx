@@ -8,8 +8,10 @@ const spSchema = { username: '', password: '' };
 
 function SPLoginForm() {
     const [sp, setSp] = useState({ ...spSchema });
-    const { status: { setLoggedIn } } = useSuperAdmin();
+    const { status } = useSuperAdmin();
+    const setLoggedIn = status?.setLoggedIn;
     const dispatch = useDispatch();
+    // 
     function superadminLogin(e) {
         e.preventDefault();
         println(sp, process.env.NEXT_PUBLIC_SUPERADMIN_NAME);

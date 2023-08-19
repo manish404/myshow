@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 const SuperAdminContext = createContext({});
+
 export function useSuperAdmin() {
     return useContext(SuperAdminContext)
 }
