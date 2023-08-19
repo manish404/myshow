@@ -54,7 +54,7 @@ function SuperAdminView() {
     )
 }
 
-function SuperAdminPage() {
+function _SuperAdminPage() {
     const { status: { loggedIn } } = useSuperAdmin();
     return (
         <div className="m-4 row h-screen">
@@ -70,8 +70,12 @@ function SuperAdminPage() {
     )
 }
 
-export default () =>
-    <SuperAdminContextProvider>
-        <SuperAdminPage />
-        <Notice />
-    </SuperAdminContextProvider>
+export default function SuperadminPage() {
+    return (
+        <>
+            <SuperAdminContextProvider>
+                <_SuperAdminPage />
+            </SuperAdminContextProvider>
+            <Notice />
+        </>)
+}
