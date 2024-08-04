@@ -7,6 +7,7 @@ import { useAuthContext } from "@/contexts/AuthContext";
 import AdminDashboard from "./Dashboard";
 import Bookings from "./Bookings";
 import Link from "next/link";
+import Notice from "@/components/Notice";
 
 const menu = ['dashboard', 'add hall', 'our halls', 'bookings'];
 
@@ -65,6 +66,7 @@ export default function AdminPage() {
                         <AdminView />
                     </>
                 </div>
+                <Notice />
             </AdminContextProvider>
         </AuthenticatedPage>
     )

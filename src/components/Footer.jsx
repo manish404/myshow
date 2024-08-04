@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
+import Menu from "./Menu";
 
 function SocialIcon({ icon }) {
     return (
@@ -8,16 +9,6 @@ function SocialIcon({ icon }) {
                 <i className={`bi bi-${icon}`}></i>
             </Link>
         </>
-    )
-}
-
-function Menu({ url, name }) {
-    return (
-        <li className="menu-item">
-            <Link aria-label={`${name} - myshow`} href={url}>
-                {name}
-            </Link>
-        </li>
     )
 }
 
@@ -95,7 +86,7 @@ function Footer() {
                             <Menu url={"/offers"} name={"Offers"} />
                             <Menu url={"/coupons"} name={"Coupons"} />
                             <Menu url={"/affiliate"} name={"Affiliate"} />
-                            <Menu url={"/careers"} name={"Careers"} />
+                            <Menu url={"/jobs"} name={"Jobs"} />
                         </ul>
                     </div>
                 </div>

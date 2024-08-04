@@ -16,12 +16,12 @@ function useMerchantForm() {
     return useContext(MerchantFormContext);
 }
 
-function MerchantInput({ type = 'text', name, label }) {
+function MerchantInput({ type = 'text', name, label, ...args }) {
     const [merchant, setMerchant] = useMerchantForm();
     return (
         <div className="input-row">
             <label htmlFor={name}>{label}</label>
-            <input value={merchant[name]} type={type} name={name}
+            <input {...args} value={merchant[name]} type={type} name={name}
                 onChange={(e) => {
                     setMerchant({ ...merchant, [name]: e.target.value });
                 }}
@@ -35,6 +35,7 @@ function MerchantForm() {
     // useMerchant -> will try to fetch merchant detail if user.role= and user.merchant;
     const { user: { user: { id: uid, email } } } = useAuthContext();
     const [uploadStatus, setUploadStatus] = useState(false);
+    merchantSchema['email'] = email;
     const [merchant, setMerchant] = useState({ ...merchantSchema });
     const dispatch = useDispatch();
     const router = useRouter();
@@ -61,7 +62,7 @@ function MerchantForm() {
         }
         println(merchantData);
         setUploadStatus(false);
-        dispatch(setNotice(`Saved, Please visit office with documents to complete it!`));
+        dispatch(setNotice(`Please visit our office with documents for futher processing!`));
         setMerchant({ ...merchantSchema });
     }
 
@@ -101,7 +102,7 @@ function MerchantForm() {
                     <form onSubmit={joinMerchant} className="col items-end">
                         <MerchantInput name={'full_name'} label={'Full Name'} />
                         <MerchantInput name={'address'} label={'Address'} />
-                        <MerchantInput type="email" name={'email'} label={'Email'} />
+                        <MerchantInput disabled type="email" name={'email'} label={'Email'} />
                         <MerchantInput type="text" name={'phone'} label={'Phone'} />
                         <MerchantInput name={'business_name'} label={'Business Name'} />
                         <MerchantInput name={'business_address'} label={'Business Address'} />

@@ -38,11 +38,14 @@ function SeatSelection({ hallID, hall, showID }) {
                         Select Seat
                         <Info data="Can book upto 10 seats at once." />
                     </h1>
-                    <div className="">
-                        <input onChange={(e) => {
-                            updateBookingDetails('date', e.target.value);
-                        }} type="date" min={today} max={maxDate} value={today} />
-                        <Info data="Can book from today upto 7 days." />
+                    <div className="w-1/4 row justify-between">
+                        <label className="font-semibold" htmlFor="booking_date">Booking date</label>
+                        <div>
+                            <input name="booking_date" onChange={(e) => {
+                                updateBookingDetails('date', e.target.value);
+                            }} type="date" min={today} max={maxDate} value={today} />
+                            <Info data="Can book from today upto 7 days." />
+                        </div>
                     </div>
                     {/* color-guide */}
                     <div className="color-guide row w-[40%] my-6 justify-between">

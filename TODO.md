@@ -21,3 +21,10 @@ check the use of axios and try to remove;
 - show form, on payment, call webhook which will update status on bookings;
 
 * merchant-payment [later]
+
+- bill and print
+- movie description, tags, duration, rating, languages, reviews, 
+    formats: [2d, 3d, imax 3d], sharing link, 
+- payment (khalti + esewa), 
+- showtimes : add price field for movie-ticket-price.
+- reward redeem on successful payment, trailer link from youtube.

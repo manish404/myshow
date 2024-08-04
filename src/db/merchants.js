@@ -8,13 +8,16 @@ async function getMerchants() {
     return data;
 }
 
-async function updateMerchantStatus(id, value) {
-    if (!id && !value) return false;
-    const { data, error } = await supabase.from('merchants')
+async function updateMerchantStatus(id, email, value) {
+    if (!id && !value && !email) return false;
+    const { data: merchantsData, error: merchantsError } = await supabase.from('merchants')
         .update({
             'active': value
         }).eq('id', id);
-    if (error) return false;
+    if (merchantsError) return false;
+    const { data: rolesData, error: rolesError } = await supabase.from('roles')
+        .update({ 'role': value ? 'admin' : 'user' }).eq('email', email);
+    if (rolesError) return false;
     return true;
 }
 

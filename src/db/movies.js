@@ -57,7 +57,7 @@ async function getMovie(userId, slug_title, movie) {
     println(`[+] Fetching movie "${slug_title}"!`);
     let { data, error } = await supabase.from('movies')
         .select(movieColumns)
-        .or(`title.ilike.%${slug_title}%`, `slug.eq.${slug_title}`); // don't change this "or" format;
+        .or(`slug.eq.${slug_title}`, `slug.ilike.%${slug_title}%`); // don't change this "or" format;
     if (error) return null;
     println('movie', data, error);
     data = data[0];

@@ -1,7 +1,7 @@
 import supabase from "@/db/supabase";
 import println from "@/helpers/print";
 
-const hallColumns = 'id, name, rows, columns, cities(name), movies(title,slug, release_date)';
+const hallColumns = 'id, name, rows, columns, cities(name), movies(title,slug, release_date), created_by';
 
 const getHalls = async (adminID = null, cityID = null, limit = null) => {
     println('[+] Fetching halls!');

@@ -1,10 +1,10 @@
 import supabase from "@/db/supabase";
 import println from "@/helpers/print";
-import { useBookings } from "@/hooks/bookingHooks";
 import { setNotice } from "@/store/slices/common";
 import { useRouter } from "next/router";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import crypto from 'crypto';
 
 const BookingContext = createContext({});
 
@@ -50,6 +50,11 @@ export default function BookingContextProvider({ children, show, uid, hall }) {
     // let { data: raw_bookings, isLoading } = useBookings(hall, bookingDetails.movie, show);
     // 
     // 
+    function generateRandomToken() {
+        const buffer = crypto.randomBytes(10);
+        return buffer.toString('hex');
+    };
+
     function getBooking() {
         return {
             ...bookingDetails,

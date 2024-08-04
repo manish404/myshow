@@ -7,7 +7,7 @@
 
 body {
     @apply overflow-x-hidden darkmode;
-    font-family:'Bricolage Grotesque', sans-serif;
+    /* font-family:'Bricolage Grotesque', sans-serif; */
 }
 
 select {
@@ -35,7 +35,10 @@ i {
 }
 
 .header {
-    @apply row w-full items-center justify-between px-20 py-1 mb-2 shadow-md right-0 left-0 z-10 bg-white darkmode;
+    @apply row w-screen px-6 mx-auto items-center justify-between py-1 mb-1 shadow-md bg-white darkmode;
+    & .menu-section {
+        @apply col items-end justify-between;
+    }
 }
 
 .menu-bar {
@@ -105,6 +108,9 @@ i {
     & input::placeholder,
     & textarea::placeholder {
         @apply text-[1rem];
+    }
+    & input:disabled{
+        @apply text-gray-500;
     }
 }
 
@@ -194,4 +200,14 @@ button[type="button"],
 .lock::before {
     content: "";
     @apply absolute top-0 left-0 w-full h-full bg-black bg-opacity-20 z-50;
+}
+
+.guide {
+    @apply border border-green-300 h-max px-2 py-1 rounded-sm m-1;
+    & h1 {
+        @apply font-bold;
+    } 
+    & .point {
+        @apply row items-center;
+    }
 }

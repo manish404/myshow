@@ -25,7 +25,7 @@ export default function Home() {
         <div className="row swashIn items-center full-page">
           <div className="relative">
             <Image priority={true} src='/trending-icon.png' alt="trending movie - myshow" className="absolute h-max top-3 right-[3%] w-[25%] swashIn" height={100} width={100} />
-            <Image priority={true} className="mx-auto w-auto" src="/trending.jpg" alt="trending movie - myshow" height={1100} width={1100} />
+            <Image onContextMenu={(e) => { e.preventDefault() }} priority={true} className="mx-auto w-auto" src="/trending.jpg" alt="trending movie - myshow" height={1100} width={1100} />
           </div>
         </div>
         {/*  */}

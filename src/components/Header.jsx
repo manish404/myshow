@@ -8,6 +8,13 @@ import { useAuthContext } from "@/contexts/AuthContext";
 import Logo from "./Logo";
 import println from "@/helpers/print";
 import { isDev } from "@/helpers/roleCheck";
+import Image from "next/image";
+
+function VR() {
+    return (
+        <hr className="w-[1px] h-3 mx-1 bg-gray-500" />
+    )
+}
 
 function Header() {
     const [search_input, setSearchInput] = useState('');
@@ -48,86 +55,90 @@ function Header() {
     // 
     return (
         <header className="header">
-            {/* image */}
-            <div>
-                <Logo width={'w-[3.5rem]'} />
+            <div className="logo">
+                <Logo width={'w-[4rem]'} />
             </div>
-            {/* menu */}
-            <ul className="menu-bar">
-                <li className="menu-item">
-                    <form className="row items-center" onSubmit={search}>
-                        <i className="bi bi-search text-green-500 text-sm mr-1"></i>
-                        <input onChange={(e) => setSearchInput(e.target.value)} value={search_input} type="text" name="search" placeholder="Search" list="search-hint" autoComplete="off" />
-                        <datalist id="search-hint">
-                            <option value="movie : " />
-                            <option value="hall : " />
-                        </datalist>
-                    </form>
-                </li>
-                {isDev(user.role) &&
-                    <>
-                        {/* <li className="menu-item">
-                            <button onClick={() => {
-                                // dispatch(setNotice('hello'))
-                                println(loggedIn, user);
-                            }}> Test
-                            </button>
-                        </li> */}
-                        {/* <li className="menu-item">
-                            <Link href={"/payment"}>
-                                Pay
-                            </Link>
-                        </li> */}
-                    </>
-                }
-                <li className="menu-item">
-                    <Link aria-label={"movies - myshow"} href={"/movies"}>
-                        Movies <i className="bi bi-film text-green-500"></i>
-                    </Link>
-                </li>
-                {loggedIn && <li className="menu-item">
-                    <Link aria-label="saved - myshow" href={"/saved"}>
-                        Saved <i className="bi bi-bookmark-fill text-green-500"></i>
-                    </Link>
-                </li>}
-                <li className="menu-item">
-                    <Link aria-label="halls - myshow" href={"/halls"}>
-                        Halls <i className="bi bi-geo-alt text-green-500"></i>
-                    </Link>
-                </li>
-                <li className="menu-item">
-                    <Link aria-label="offers - myshow" href={"/offers"}>
-                        Offers <i className="bi bi-gift-fill text-green-500"></i>
-                    </Link>
-                </li>
-                {!loggedIn &&
+            <div className="menu-section">
+                <ul className="row mb-1">
+                    <li className="text-xs"><Link href={"/offers"}>Offers</Link></li>
+                    <VR />
+                    <li className="text-xs"><Link href={"/about"}>About</Link></li>
+                    <VR />
+                    <li className="text-xs"><Link href={"/contact"}>Contact</Link></li>
+                    <VR />
+                    <li className="text-xs"><Link href={"/guide"}>Guide</Link></li>
+                </ul>
+                <ul className="menu-bar">
                     <li className="menu-item">
-                        <button className="row items-center" onClick={async () => {
-                            const DOMAIN = location.origin;
-                            await signInWithGoogle(DOMAIN);
-                        }}>
-                            Sign In
+                        <form className="row items-center" onSubmit={search}>
+                            <i className="bi bi-search text-green-500 text-sm mr-1"></i>
+                            <input onChange={(e) => setSearchInput(e.target.value)} value={search_input} type="text" name="search" placeholder="Search" list="search-hint" autoComplete="off" />
+                            <datalist id="search-hint">
+                                <option value="movie : " />
+                                <option value="hall : " />
+                            </datalist>
+                        </form>
+                    </li>
+                    {isDev(user.role) &&
+                        <>
+                            {/* <li className="menu-item">
+                    <button onClick={() => {
+                        // dispatch(setNotice('hello'))
+                        println(loggedIn, user);
+                    }}> Test
+                    </button>
+                </li> */}
+                            {/* <li className="menu-item">
+                    <Link href={"/payment"}>
+                        Pay
+                    </Link>
+                </li> */}
+                        </>
+                    }
+                    <li className="menu-item">
+                        <Link aria-label={"movies - myshow"} href={"/movies"}>
+                            Movies <i className="bi bi-film text-green-500"></i>
+                        </Link>
+                    </li>
+                    {loggedIn && <li className="menu-item">
+                        <Link aria-label="saved - myshow" href={"/saved"}>
+                            Saved <i className="bi bi-bookmark-fill text-green-500"></i>
+                        </Link>
+                    </li>}
+                    <li className="menu-item">
+                        <Link aria-label="halls - myshow" href={"/halls"}>
+                            Halls <i className="bi bi-geo-alt text-green-500"></i>
+                        </Link>
+                    </li>
+                    {!loggedIn &&
+                        <li className="menu-item">
+                            <button className="row items-center" onClick={async () => {
+                                const DOMAIN = location.origin;
+                                await signInWithGoogle(DOMAIN);
+                            }}>
+                                Sign In
+                            </button>
+                        </li>
+                    }
+                    {loggedIn &&
+                        <>
+                            <li className="menu-item">
+                                <Link aria-label="profile - myshow" href={"/profile"}>
+                                    {/* <i className="bi bi-person-circle "></i> */}
+                                    <img width={30} className="rounded-3xl" src={user?.picture} alt={user?.name} />
+                                </Link>
+                            </li>
+                        </>
+                    }
+                    <li>
+                        <button onClick={switchTheme}>
+                            <i className={`text-2xl ml-2 bi bi-${theme === 'light' ? 'brightness-low' : 'brightness-high'
+                                }`}></i>
                         </button>
                     </li>
-                }
-                {loggedIn &&
-                    <>
-                        <li className="menu-item">
-                            <Link aria-label="profile - myshow" href={"/profile"}>
-                                {/* <i className="bi bi-person-circle "></i> */}
-                                <img width={30} className="rounded-3xl" src={user?.picture} alt={user?.name} />
-                            </Link>
-                        </li>
-                    </>
-                }
-                <li>
-                    <button onClick={switchTheme}>
-                        <i className={`text-2xl ml-2 bi bi-${theme === 'light' ? 'brightness-low' : 'brightness-high'
-                            }`}></i>
-                    </button>
-                </li>
-            </ul>
-        </header >
+                </ul>
+            </div>
+        </header>
     )
 }
 

@@ -16,7 +16,7 @@ import { setNotice } from "@/store/slices/common";
 function MovieView({ type, movie: slug_title, slugify: shouldSlugify = false, basic }) {
     if (shouldSlugify) slug_title = slugify(slug_title, { lower: true, strict: true });
     const { user: { user: { id, role } } } = useAuthContext();
-    const { data: movieDetails } = useMovie(id, type === 'search' ? true : false, slug_title);
+    const { data: movieDetails, isLoading, isFetched } = useMovie(id, type === 'search' ? true : false, slug_title);
     const router = useRouter();
     const dispatch = useDispatch();
     return (
@@ -56,8 +56,12 @@ function MovieView({ type, movie: slug_title, slugify: shouldSlugify = false, ba
                                 </ul>
                             }
                         </div>
-                    </div> :
-                    <h1 className="font-semibold text-xl">Movie Not Found!</h1>
+                    </div> : isLoading ? <Loader /> :
+                        <>{
+                            isFetched &&
+                            <h1 className="font-semibold text-xl">Movie Not Found!</h1>
+                        }
+                        </>
                 }
             </div>
         </>

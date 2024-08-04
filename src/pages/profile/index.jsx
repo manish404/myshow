@@ -30,13 +30,11 @@ function ProfilePage() {
             <div className="flex">
                 <div className="left-view w-[20%]">
                     <ul>
-                        <DashMenu>
-                            <button className={view === 'account' ? 'bg-gray-100' : ''} onClick={changeView} data-view="account">Account</button>
-                        </DashMenu>
+                        <li><button className={`my-2 menu-item capitalize rounded-sm px-1 py-2 ${view === 'account' ? 'bg-gray-100' : ''}`}
+                            onClick={changeView} data-view="account">Account</button></li>
                         {(isUser(role) || isAdmin(role)) &&
-                            <DashMenu>
-                                <button className={view === 'my-bookings' ? 'bg-gray-100' : ''} onClick={changeView} data-view="my-bookings">Bookings</button>
-                            </DashMenu>
+                            <li><button className={`my-2 menu-item capitalize rounded-sm px-1 py-2 ${view === 'my-bookings' ? 'bg-gray-100' : ''}`}
+                                onClick={changeView} data-view="my-bookings">Bookings</button></li>
                         }
                         {/*  */}
                         {
@@ -46,7 +44,7 @@ function ProfilePage() {
                             </DashMenu>
                         }
                         {
-                            isSuperAdmin(role) &&
+                            (isSuperAdmin(role) || isOwner('role')) &&
                             <DashMenu>
                                 <Link aria-label="myshow" href={"/superadmin"}>Superadmin Panel</Link>
                             </DashMenu>

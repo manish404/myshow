@@ -22,7 +22,7 @@ function MerchantRow({ merchant }) {
                 <select className="w-max" name="active" value={active}
                     onChange={async (e) => {
                         const { value } = e.target;
-                        const res = await updateMerchantStatus(merchant?.id, value);
+                        const res = await updateMerchantStatus(merchant?.id, merchant?.email, value);
                         const updatedStatus = !active ? 'activated' : 'deactivated';
                         if (res) {
                             setActive(state => !state);
@@ -51,7 +51,7 @@ function MerchantsTable({ merchants }) {
                     <td>Email</td>
                     <td>Address</td>
                     <td>Phone</td>
-                    <td>Active</td>
+                    <td>Status</td>
                 </tr>
             </thead>
             <tbody>

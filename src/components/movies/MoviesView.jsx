@@ -1,9 +1,8 @@
-import Loader from "../Loader";
 import MovieCard from "./MovieCard";
-import { useMovies } from "@/hooks/movieHooks";
-import ArrowButton from "../buttons/ArrowButton";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
+import Loader from "../Loader";
+import { useMovies } from "@/hooks/movieHooks";
 
 function MoviesView() {
     const { user: { user: { role, id } } } = useAuthContext();

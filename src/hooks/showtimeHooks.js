@@ -1,7 +1,7 @@
 import { getShowTimes, getShowTimesByMovie } from "@/db/showtime";
 import { useQuery } from "@tanstack/react-query";
 
-const staleTime = (process.env.NODE_ENV === 'development' ? 10 : 5)
+const staleTime = (process.env.NODE_ENV === 'development' ? 5 : 1)
     * 60 * 1000; // cache-time in minutes, converted to ms;
 
 export const useShowTimes = (hallID = null, movie = null) => {

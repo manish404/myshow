@@ -23,8 +23,15 @@ function AccountView() {
                         </ul>
                     </div>
                     {isUser(user?.role) &&
-                        <div className="bottom mt-10">
-                            <ArrowButton text="Join Merchant" url="/admin/merchant/" position="front" />
+                        <div className="bottom mt-10 border border-green-100 rounded-md bg-green-100 w-full mx-auto">
+                            <div className="py-5 col items-center">
+                                <span className="mb-5">
+                                    As a cinema owner, you've to fill up the merchant form. <br />
+                                    Then you must visit the office with original pan-card and business's documents and Citizenship. <br />
+                                    After payment and permission, you'll be given admin/merchant access.
+                                </span>
+                                <ArrowButton text="Become Merchant" url="/admin/merchant/" position="front" />
+                            </div>
                         </div>
                     }
                 </div> :
