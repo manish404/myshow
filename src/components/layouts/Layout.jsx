@@ -4,7 +4,7 @@ import Notice from "../Notice";
 
 function Layout(props) {
     return (
-        <div className="col">
+        <div className="flex flex-col gap-y-1">
             <Header />
             <div className="px-20">
                 {props.children}

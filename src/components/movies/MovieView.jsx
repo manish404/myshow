@@ -24,10 +24,10 @@ function MovieView({ type, movie: slug_title, slugify: shouldSlugify = false, ba
             <Head>
                 <title>myshow.com | {capitalize(movieDetails?.title)}</title>
             </Head>
-            <div className="w-[80%] m-auto full-page">
+            <div className="w-[80%] m-auto">
                 {movieDetails ?
                     <div className="movie-details mt-8 row content-around place-items-start">
-                        <div className="">
+                        <div>
                             {/* title */}
                             <h1 className="text-2xl font-semibold capitalize row justify-between">{movieDetails?.title}
                                 {
@@ -44,7 +44,7 @@ function MovieView({ type, movie: slug_title, slugify: shouldSlugify = false, ba
                             {/* release-date */}
                             <h1 className="font-semibold text-base">Release Date : <span>{movieDetails?.release_date}</span></h1>
                             {/* description */}
-                            <p className="p-1 my-2">{movieDetails?.description}</p>
+                            <p className="p-1 my-2 whitespace-pre-line">{movieDetails?.description}</p>
                         </div>
                         {/* shows-time */}
                         <div className="ml-[2.5rem] font-semibold">

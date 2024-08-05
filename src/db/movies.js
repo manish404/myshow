@@ -37,10 +37,12 @@ const getMovies = async (userId, releasing_soon/**false by default */) => {
     // 
     let data, error;
     if (releasing_soon) {
-        ({ data, error } = await supabase.from('movies').select('title, slug')
+        ({ data, error } = await supabase.from('movies')
+            .select('title, slug').order("release_date")
             .or(`release_date.gt.${today}`, `release_date.lt.${today}`));
     } else {
-        ({ data, error } = await supabase.from('movies').select(movieColumns).limit(10));
+        ({ data, error } = await supabase.from('movies')
+            .select(movieColumns).order("release_date", { ascending: false }).limit(20));
         if (error) return null;
         data = await Promise.all(data.map(async (movie) => {
             const isLiked = await isMovieLiked(userId, movie?.id);

@@ -43,15 +43,15 @@ function MerchantsTable({ merchants }) {
         <table className="w3-table w3-bordered text-[0.9rem] w-full">
             <thead>
                 <tr>
-                    <td>Business Name</td>
-                    <td>Address</td>
-                    <td>Pan No.</td>
-                    <td>Start Date</td>
-                    <td>Owner's Name</td>
-                    <td>Email</td>
-                    <td>Address</td>
-                    <td>Phone</td>
-                    <td>Status</td>
+                    <th>Business Name</th>
+                    <th>Address</th>
+                    <th>Pan No.</th>
+                    <th>Start Date</th>
+                    <th>Owner's Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>

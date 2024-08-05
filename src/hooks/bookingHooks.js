@@ -5,14 +5,15 @@ import supabase from "@/db/supabase";
 const staleTime = (process.env.NODE_ENV === 'development' ? 5 : 1 / 2)
     * 60 * 1000; // cache-time in minutes, converted to ms;
 
+const COLS = 'id, date, movies(title), halls(name, cities(name)), showtimes(time, shift, ticket_price), booked, seats';
 async function getBookings(uid, hallId) {
     println("Fetching my bookings");
     let data, error;
     if (uid) ({ data, error } = await supabase.from('bookings')
-        .select('id, date, movies(title), halls(name, cities(name)), showtimes(time, shift, ticket_price), booked, seats')
+        .select(COLS)
         .eq('booked_by', uid));
     else if (hallId) ({ data, error } = await supabase.from('bookings')
-        .select('date, movies(title), showtimes(time, shift), booked, seats')
+        .select(COLS)
         .eq('hall', hallId));
     if (error) return null;
     println(`bookings hall:${hallId} or user:${uid}`, data);

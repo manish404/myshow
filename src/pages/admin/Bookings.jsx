@@ -12,7 +12,9 @@ function BookingsInHall({ hall }) {
     return (
         <>
             {bookings?.length > 0 ?
-                <BookingsTable bookings={bookings} /> :
+                <div className="overflow-y-auto h-[100%]">
+                    <BookingsTable bookings={bookings} />
+                </div> :
                 <h1 className="font-semibold text-xl">No bookings were done!</h1>
             }
         </>
@@ -44,9 +46,9 @@ function Bookings() {
                     :
                     <h1 className="font-semibold text-xl">No hall is selected!</h1>
             }
-            <TODO todos={[
+            {/* <TODO todos={[
                 'pagination'
-            ]} />
+            ]} /> */}
         </div>
     )
 }

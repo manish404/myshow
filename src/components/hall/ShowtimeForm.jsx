@@ -14,14 +14,16 @@ const _showtimeSchema = (hallID, movie) => ({
     time: '',
     shift: 0,
     hall: hallID,
-    movie: movie
+    movie: movie,
+    ticket_price: '',
 });
 
 const showtimeValidator = Joi.object({
     time: Joi.string().regex(/\d{1,2}:\d{2}/).required().label('Show Time'),
     shift: Joi.number().min(0).max(1).required().label('Shift'),
     hall: Joi.allow(),
-    movie: Joi.allow()
+    movie: Joi.allow(),
+    ticket_price: Joi.required(),
 })
 
 export default function ShowtimeForm({ hallID, movie }) {
@@ -67,8 +69,9 @@ export default function ShowtimeForm({ hallID, movie }) {
         setOptions(_minutes);
     }
     function handleChange(e) {
-        const { name, value } = e.target;
+        let { name, value } = e.target;
         if (name === 'time') generateMinutes(e.target.value);
+        else if (name === "ticket_price") value = parseFloat(value);
         setShowtime({
             ...showtime,
             [name]: value
@@ -79,7 +82,7 @@ export default function ShowtimeForm({ hallID, movie }) {
             <h1 className="font-semibold">Add show time
                 <Info data={"Add carefully! Cannot delete it later!"} />
             </h1>
-            <form className="h-[2.2rem] row items-center justify-between w-[70%]" onSubmit={uploadShowTime}>
+            <form className="h-[2.2rem] flex flex-col row items-center justify-between" onSubmit={uploadShowTime}>
                 <input className="h-full" required placeholder="HH:MM" list="showtime-hint" autoComplete="off"
                     type="text" name="time" value={showtime.time} onChange={handleChange} />
                 <datalist id='showtime-hint'>
@@ -94,6 +97,8 @@ export default function ShowtimeForm({ hallID, movie }) {
                     <option value="0">AM</option>
                     <option value="1">PM</option>
                 </select>
+                <input className="h-full" required placeholder="NRs."
+                    type="number" name="ticket_price" value={showtime.ticket_price} onChange={handleChange} />
                 <button className="h-full flex items-center" type="submit">
                     {
                         !uploading ? "Add" : <Loader />
