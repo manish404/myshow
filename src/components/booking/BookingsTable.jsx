@@ -79,7 +79,7 @@ function BookingsTable({ bookings }) {
                                                 </button>
                                             </Tooltip>
                                             <Tooltip className="bg-black p-1" content={`${booking?.booked ? "Already paid" : "Pay with khalti"}`}>
-                                                <button className="cursor-pointer" disabled={booking?.booked} onClick={() => {
+                                                <button className="cursor-pointer" onClick={() => {
                                                     const tsxId = booking.id, //booking.id;
                                                         username = user?.full_name || user?.name || '',
                                                         tsxName = `${booking.movies.title} at ${booking.halls.name} by ${username}`,
