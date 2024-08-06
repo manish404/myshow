@@ -79,7 +79,7 @@ function BookingsTable({ bookings }) {
                                                 </button>
                                             </Tooltip>
                                             <Tooltip className="bg-black p-1" content={`${booking?.booked ? "Already paid" : "Pay with khalti"}`}>
-                                                <button className="cursor-pointer" onClick={() => {
+                                                <button className="cursor-pointer" disabled={booking?.booked} onClick={() => {
                                                     const tsxId = booking.id, //booking.id;
                                                         username = user?.full_name || user?.name || '',
                                                         tsxName = `${booking.movies.title} at ${booking.halls.name} by ${username}`,
@@ -89,7 +89,7 @@ function BookingsTable({ bookings }) {
                                                         makePayment(location.origin, tsxId, tsxName, tsxAmount);
                                                     }
                                                 }}>
-                                                    <i className="bi bi-wallet2 text-violet-700"></i>
+                                                    <i className={`bi bi-wallet2 ${booking?.booked ? 'text-gray-400' : 'text-violet-700'}`}></i>
                                                 </button>
                                             </Tooltip>
                                             <Tooltip className="bg-black p-1" content={`${booking?.booked ? "Already paid" : "Pay (Cash)"}`}>
@@ -102,7 +102,7 @@ function BookingsTable({ bookings }) {
                                                         } catch (e) { }
                                                     }
                                                 }}>
-                                                    <i className="bi bi-wallet2"></i>
+                                                    <i className={`bi bi-wallet2 ${booking?.booked ? '' : 'text-gray-400'}`}></i>
                                                 </button>
                                             </Tooltip>
                                         </div>
